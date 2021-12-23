@@ -1,0 +1,30 @@
+.tiktak-main{
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+.tiktak-rw{
+    width: 300px;
+}
+.cla{
+    /* border:1px solid black; */
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bd-r{
+    border-right: 1px solid #000;
+}
+.bd-b{
+    /* border-right: 1px solid #000; */
+    border-bottom: 1px solid #000;
+}
+#disPlayer{
+    display: flex;
+    padding: 10px;
+}
+.tiktak-rw a{
+    text-decoration: none !important;
+    color: #000 !important;
+}
