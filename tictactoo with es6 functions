@@ -1,0 +1,145 @@
+
+var Player = ['X', 'O'];
+// var winCom = [
+//     [0, 1, 2], [3, 4, 5], [6, 7, 8], //horizantal
+//     [0, 3, 6], [1, 4, 7], [2, 5, 8], //Vertical
+//     [2, 4, 6], [0, 4, 8] //digonals
+
+// ]
+var count = 0;
+
+var cells = document.querySelectorAll('.cells')
+var startGam = document.getElementById('idstr')
+var disPlayer = document.querySelector('#disPlayer')
+var gameWin = null;
+startGam.addEventListener('click', startGame)
+function startGame() {
+    for (i = 0; i < cells.length; i++) {
+        cells[i].addEventListener('click', cellClick)
+        cells[i].innerText = ''
+    }
+    disPlayer.innerText = ''
+    gameWin = null;
+}
+function cellClick(e) {
+    var cell = e.target.id
+    var currentplay = Player[count % 2]
+    cellTurn(cell, currentplay)
+}
+function cellTurn(cell, currentplay) {
+    var currentCell = document.getElementById(cell)
+    currentCell.innerText = currentplay
+    count++
+    if (currentCell.innerText === currentplay) {
+        currentCell.removeEventListener('click', cellClick)
+    }
+    else {
+        currentCell.addEventListener('click', cellClick)
+    }
+    if (currentplay === "X") {
+        disPlayer.innerText = 'Player X'
+    }
+    else {
+        disPlayer.innerText = 'Player O'
+    }
+    //getting winner 
+    let gamewinner = checkWin(currentplay)
+    if (gamewinner) gameOver(gamewinner)
+}
+function checkWin(currentplay) {
+    //var gameWin = null
+    //horizantal wincombo
+    for (var i = 0; i <= 8; i++) {
+        if (i >= 4) {
+            //horizantal wincombo
+            if (cells[0].innerText === currentplay) {
+                if (cells[1].innerText === currentplay) {
+                    if (cells[2].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+            else if (cells[3].innerText === currentplay) {
+                if (cells[4].innerText === currentplay) {
+                    if (cells[5].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+
+            else if (cells[6].innerText === currentplay) {
+                if (cells[7].innerText === currentplay) {
+                    if (cells[8].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+        }
+    }
+    //Vertical wincombo
+    for (var i = 0; i <= 8; i++) {
+        if (i >= 4) {
+            //Vertical wincombo
+            if (cells[0].innerText === currentplay) {
+                if (cells[3].innerText === currentplay) {
+                    if (cells[6].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+            else if (cells[1].innerText === currentplay) {
+                if (cells[4].innerText === currentplay) {
+                    if (cells[7].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+            else if (cells[2].innerText === currentplay) {
+                if (cells[5].innerText === currentplay) {
+                    if (cells[8].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+        }
+    }
+    //digonal wincombo
+    for (var i = 0; i <= 8; i++) {
+        if (i >= 4) {
+            //digonal  wincombo
+            if (cells[0].innerText === currentplay) {
+                if (cells[4].innerText === currentplay) {
+                    if (cells[8].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+            else if (cells[2].innerText === currentplay) {
+                if (cells[4].innerText === currentplay) {
+                    if (cells[6].innerText === currentplay) {
+                        return gameWin = { currentplay: currentplay }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+function gameOver(gamewin) {
+    debugger
+    if (gamewin.currentplay === Player[0]) {
+        disPlayer.innerText = 'Player X WON'
+        gamewin = ''
+    }
+    else {
+        disPlayer.innerText = 'Player O Won'
+        gamewin = ''
+    }
+    for (i = 0; i < cells.length; i++) {
+        cells[i].removeEventListener('click', cellClick, false)
+    }
+    startGam.innerText='Reset'
+
+}
